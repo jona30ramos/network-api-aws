@@ -25,10 +25,11 @@ export class FormController extends Controller {
 
       const response: any= await saveFileInS3(nameKey, body?.form)
     
-      if(response?.['$metadata']?.httpStatusCode === 200 )
-        return { data: { statuCode: 200, message: 'Formulario guardado correctamente' } }
-      return { data: { statuCode: 400, message: 'Ocurrio un incoveniente al intentar guardar el formulario.' } }
+      if (response?.['$metadata']?.httpStatusCode === 200 ) 
+        return { statuCode: 200, message: 'Formulario guardado correctamente' } 
+      
+      return { statuCode: 400, message: 'Ocurrio un incoveniente al intentar guardar el formulario.' }
     }
-    return { data: { statuCode: 400, message: 'No se pudo procesar la información' } }
+    return { statuCode: 400, message: 'No se pudo procesar la información' }
   }
 }
