@@ -1,0 +1,24 @@
+{
+  "entryFile": "src/index.ts",
+  "noImplicitAdditionalProperties": "throw-on-extras",
+  "controllerPathGlobs": [
+    "src/**/*controller.ts"
+  ],
+  "spec": {
+    "basePath": "/api/v1",
+    "outputDirectory": "build",
+    "specVersion": 3,
+    "securityDefinitions": {
+      "api_key": {
+        "type": "http",
+        "name": "X-api-key",
+        "in": "header"
+      }
+    }
+  },
+  "routes": {
+    "routesDir": "build",
+    "authenticationModule": "./src/middlewares/authentication.ts",
+    "basePath": "/api/v1"
+  }
+}
