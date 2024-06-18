@@ -18,12 +18,18 @@ export class FormController extends Controller {
   @Security('api_key')
   @Middlewares(authorize)
   public async matches(@Body() body: any): Promise<AnyValue> {
+    // eslint-disable-next-line no-console
+    console.log('🚀 ~ FormController ~ matches ~ body:', body)
 
     if(body?.form){
     
       const nameKey: string = `${body?.form?.form_uuid}.json`
+      // eslint-disable-next-line no-console
+      console.log('🚀 ~ FormController ~ matches ~ nameKey:', nameKey)
 
       const response: any= await saveFileInS3(nameKey, body?.form)
+      // eslint-disable-next-line no-console
+      console.log('🚀 ~ FormController ~ matches ~ response:', response)
     
       if (response?.['$metadata']?.httpStatusCode === 200 ) 
         return { statuCode: 200, message: 'Formulario guardado correctamente' } 
