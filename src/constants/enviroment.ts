@@ -23,19 +23,19 @@ export class Environment {
   }
 
   get awsRegion(){
-    return process.env.AWS_DEFAULT_REGION ?? ''
+    return process.env.DEFAULT_REGION ?? ''
   }
 
   get awsAccessKey() {
-    return process.env.AWS_PUBLIC_KEY ?? ''
+    return process.env.PUBLIC_KEY ?? ''
   }
 
   get awsSecretKey() {
-    return process.env.AWS_SECRET_KEY ?? ''
+    return process.env.SECRET_KEY ?? ''
   }
 
   get awsBucket() {
-    return process.env.AWS_BUCKET_NAME ?? ''
+    return process.env.BUCKET_NAME ?? ''
   }
 
   get awsCredentials(){
