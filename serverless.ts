@@ -4,9 +4,8 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 const serverlessConfiguration: AWS = {
-  app: 'api-form-due-diligence-pep',
-  service: 'api-form-due-diligence-pep',
-  org: process.env.ORG,
+  app: 'api-form-save-due-diligence-pep',
+  service: 'api-form-save-due-diligence-pep',
   frameworkVersion: '3',
   plugins: [
     'serverless-dotenv-plugin',
@@ -20,7 +19,7 @@ const serverlessConfiguration: AWS = {
       version: 'V2',
     },
     customDomain: {
-      domainName: 'form-due-diligence-pep.api.chivowallet.com',
+      domainName: 'kyc-dev.api.chivowallet.com',
       createRoute53Record: true,
     },
   },
@@ -28,9 +27,8 @@ const serverlessConfiguration: AWS = {
     name: 'aws',
     runtime: 'nodejs18.x',
     region: 'ca-central-1',
-    stackName: 'api-form-due-diligence-pep-production',
     timeout: 300,
-    stage: 'production',
+    stage: 'dev',
     iam: {
       role: {
         statements: [
@@ -46,6 +44,10 @@ const serverlessConfiguration: AWS = {
               'ec2:DescribeInstances',
               'ec2:AttachNetworkInterface',
               'rds-db:connect',
+              's3:GetObject', // Permiso para leer objetos de S3
+              's3:ListBucket', // Permiso para listar objetos en el bucket de S3
+              's3:PutObject',
+              's3:PutObjectAcl',
             ],
             Resource: '*',
           },
@@ -66,8 +68,8 @@ const serverlessConfiguration: AWS = {
     api: {
       handler: './lib/src/index.handler',
       vpc: {
-        securityGroupIds: ['sg-005620a4ccf2dc568'],
-        subnetIds: ['subnet-0b0b267e79e235fd2', 'subnet-0b759cf6d22f011c6'],
+        securityGroupIds: ['sg-0eb50b7f9e4595c5e'],
+        subnetIds: ['subnet-04f26ae95cb41e206', 'subnet-0bc62b00202434418', 'subnet-0fe2a770b2fd708d1'],
       },
       events: [
         {
