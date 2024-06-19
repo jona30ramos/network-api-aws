@@ -18,24 +18,28 @@ export class FormController extends Controller {
   @Security('api_key')
   @Middlewares(authorize)
   public async matches(@Body() body: any): Promise<AnyValue> {
-    // eslint-disable-next-line no-console
     console.log('🚀 ~ FormController ~ matches ~ body:', body)
 
-    if(body?.form){
-    
-      const nameKey: string = `${body?.form?.form_uuid}.json`
-      // eslint-disable-next-line no-console
-      console.log('🚀 ~ FormController ~ matches ~ nameKey:', nameKey)
-
-      const response: any= await saveFileInS3(nameKey, body?.form)
-      // eslint-disable-next-line no-console
-      console.log('🚀 ~ FormController ~ matches ~ response:', response)
-    
-      if (response?.['$metadata']?.httpStatusCode === 200 ) 
-        return { statuCode: 200, message: 'Formulario guardado correctamente' } 
-      
-      return { statuCode: 400, message: 'Ocurrio un incoveniente al intentar guardar el formulario.' }
+    if (!body?.form) {
+      return { statusCode: 400, message: 'No se pudo procesar la información.' }
     }
-    return { statuCode: 400, message: 'No se pudo procesar la información' }
+
+    const { form_uuid } = body.form;
+    const nameKey: string = `${form_uuid}.json`;
+    console.log('🚀 ~ FormController ~ matches ~ nameKey:', nameKey)
+
+    try {
+      const response: any = await saveFileInS3(nameKey, body.form);
+      console.log('🚀 ~ FormController ~ matches ~ response:', response)
+
+      if (response?.['$metadata']?.httpStatusCode === 200) {
+        return { statusCode: 200, message: 'Formulario guardado correctamente' }
+      } else {
+        return { statusCode: 400, message: 'Ocurrió un inconveniente al intentar guardar el formulario.' }
+      }
+    } catch (error) {
+      console.error('🚀 ~ FormController ~ matches ~ error:', error);
+      return { statusCode: 500, message: 'Error interno del servidor al guardar el formulario.' }
+    }
   }
 }

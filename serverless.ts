@@ -27,7 +27,7 @@ const serverlessConfiguration: AWS = {
     name: 'aws',
     runtime: 'nodejs18.x',
     region: 'ca-central-1',
-    timeout: 300,
+    timeout: 900,
     stage: 'dev',
     iam: {
       role: {
