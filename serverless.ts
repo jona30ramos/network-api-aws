@@ -68,7 +68,7 @@ const serverlessConfiguration: AWS = {
     api: {
       handler: './lib/src/index.handler',
       vpc: {
-        securityGroupIds: process.env.SECRURITY_GROUP_IDS?.split(',') ?? [],
+        securityGroupIds: process.env.SECURITY_GROUP_IDS?.split(',') ?? [],
         subnetIds: process.env.SUBNET_IDS?.split(',') ?? [],
       },
       events: [
