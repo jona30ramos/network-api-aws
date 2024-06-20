@@ -76,6 +76,16 @@ const serverlessConfiguration: AWS = {
           http: {
             method: 'ANY',
             path: '/{proxy+}',
+            cors: {
+              origins: [
+                'https://kyc-dev.chivowallet.com',
+                'http://localhost:3000',
+                'https://dxv77517aqbv5.cloudfront.net',
+              ],
+              methods: ['GET', 'HEAD', 'OPTIONS'],
+              headers: ['content-type', 'x-api-key'],
+              allowCredentials: false,
+            },
           },
         },
       ],
