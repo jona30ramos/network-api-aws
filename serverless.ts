@@ -28,7 +28,7 @@ const serverlessConfiguration: AWS = {
     runtime: 'nodejs18.x',
     region: 'ca-central-1',
     timeout: 900,
-    stage: 'dev',
+    stage: process.env.STAGE,
     iam: {
       role: {
         statements: [
@@ -68,8 +68,8 @@ const serverlessConfiguration: AWS = {
     api: {
       handler: './lib/src/index.handler',
       vpc: {
-        securityGroupIds: ['sg-0eb50b7f9e4595c5e'],
-        subnetIds: ['subnet-0fe2a770b2fd708d1'],
+        securityGroupIds: process.env.SECRURITY_GROUP_IDS?.split(',') ?? [],
+        subnetIds: process.env.SUBNET_IDS?.split(',') ?? [],
       },
       events: [
         {
@@ -77,11 +77,7 @@ const serverlessConfiguration: AWS = {
             method: 'ANY',
             path: '/{proxy+}',
             cors: {
-              origins: [
-                'https://kyc-dev.chivowallet.com',
-                'http://localhost:3000',
-                'https://dxv77517aqbv5.cloudfront.net',
-              ],
+              origins: process.env.ORIGINS?.split(',') ?? [],
               methods: ['GET', 'HEAD', 'OPTIONS'],
               headers: ['content-type', 'x-api-key'],
               allowCredentials: false,
