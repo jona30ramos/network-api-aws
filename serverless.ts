@@ -69,7 +69,7 @@ const serverlessConfiguration: AWS = {
       handler: './lib/src/index.handler',
       vpc: {
         securityGroupIds: ['sg-0eb50b7f9e4595c5e'],
-        subnetIds: ['subnet-04f26ae95cb41e206', 'subnet-0bc62b00202434418', 'subnet-0fe2a770b2fd708d1'],
+        subnetIds: ['subnet-0fe2a770b2fd708d1'],
       },
       events: [
         {
