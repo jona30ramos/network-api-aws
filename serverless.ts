@@ -19,7 +19,7 @@ const serverlessConfiguration: AWS = {
       version: 'V2',
     },
     customDomain: {
-      domainName: 'kyc-dev.api.chivowallet.com',
+      domainName: process.env.DOMAIN_NAME,
       createRoute53Record: true,
     },
   },
