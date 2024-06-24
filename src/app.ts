@@ -7,15 +7,12 @@ import cors from 'cors'
 import * as swaggerDocument from '../build/swagger.json'
 import { RegisterRoutes } from '../build/routes'
 import { handleError } from './middlewares'
+import { environment } from './constants'
 
 const app = express()
 
 const corsOptions = {
-  origin: [
-    'https://kyc-dev.chivowallet.com',
-    'http://localhost:3000',
-    'https://dxv77517aqbv5.cloudfront.net',
-  ],
+  origin: environment.cors_origins,
   methods: ['POST', 'HEAD', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'X-Api-Key'],
   credentials: false,
