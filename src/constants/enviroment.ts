@@ -44,6 +44,10 @@ export class Environment {
       secretAccessKey: this.awsSecretKey,
     }
   }
+
+  get cors_origins() {
+    return process.env.CORS_ORIGINS?.split(',') ?? []
+  }
 }
 
 export const environment = new Environment()
