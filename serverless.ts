@@ -19,7 +19,7 @@ const serverlessConfiguration: AWS = {
       version: 'V2',
     },
     customDomain: {
-      domainName: 'kyc-dev.api.chivowallet.com',
+      domainName: process.env.DOMAIN_NAME,
       createRoute53Record: true,
     },
   },
@@ -28,7 +28,7 @@ const serverlessConfiguration: AWS = {
     runtime: 'nodejs18.x',
     region: 'ca-central-1',
     timeout: 900,
-    stage: 'dev',
+    stage: process.env.STAGE,
     iam: {
       role: {
         statements: [
@@ -68,14 +68,20 @@ const serverlessConfiguration: AWS = {
     api: {
       handler: './lib/src/index.handler',
       vpc: {
-        securityGroupIds: ['sg-0eb50b7f9e4595c5e'],
-        subnetIds: ['subnet-04f26ae95cb41e206', 'subnet-0bc62b00202434418', 'subnet-0fe2a770b2fd708d1'],
+        securityGroupIds: process.env.SECURITY_GROUP_IDS?.split(',') ?? [],
+        subnetIds: process.env.SUBNET_IDS?.split(',') ?? [],
       },
       events: [
         {
           http: {
             method: 'ANY',
             path: '/{proxy+}',
+            cors: {
+              origins: process.env.ORIGINS?.split(',') ?? [],
+              methods: ['GET', 'HEAD', 'OPTIONS'],
+              headers: ['content-type', 'x-api-key'],
+              allowCredentials: false,
+            },
           },
         },
       ],
