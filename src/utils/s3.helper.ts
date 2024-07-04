@@ -13,7 +13,7 @@ export const saveFileInS3 = async (NameKey: string, jsonData: any) => {
 
     const parameters: any = {
       Bucket: environment.awsBucket,
-      Key: `testing-lambda/${NameKey}`,
+      Key: `${environment.dirSaveAnswers}/${NameKey}`,
       Body: jsonString,
     }
 

@@ -48,6 +48,10 @@ export class Environment {
   get cors_origins() {
     return process.env.CORS_ORIGINS?.split(',') ?? []
   }
+
+  get dirSaveAnswers() {
+    return process.env.DIR ?? ''
+  }
 }
 
 export const environment = new Environment()
