@@ -22,7 +22,7 @@ export class Environment {
     }
   }
 
-  get awsRegion(){
+  get awsRegion() {
     return process.env.DEFAULT_REGION ?? ''
   }
 
@@ -38,7 +38,7 @@ export class Environment {
     return process.env.BUCKET_NAME ?? ''
   }
 
-  get awsCredentials(){
+  get awsCredentials() {
     return {
       accessKeyId: this.awsAccessKey,
       secretAccessKey: this.awsSecretKey,

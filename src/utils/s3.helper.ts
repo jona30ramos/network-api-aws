@@ -8,7 +8,6 @@ export const client = new S3Client({
 
 export const saveFileInS3 = async (NameKey: string, jsonData: any) => {
   try {
-
     const jsonString = JSON.stringify(jsonData)
 
     const parameters: any = {

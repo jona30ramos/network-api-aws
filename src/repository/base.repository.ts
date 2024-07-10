@@ -1,9 +1,7 @@
 import { createPool, PoolOptions, Pool } from 'mysql2/promise'
 import { environment } from '../constants'
 import { InitializedPoolError } from '../errors'
-import type {
-  AnyValue,
-} from '../types'
+import type { AnyValue } from '../types'
 
 let pool: Pool
 
@@ -41,17 +39,11 @@ export abstract class BaseRepository {
     return pool.query<T[]>(sql, parameters)
   }
 
-  protected async getRecords (
-    parameters: AnyValue,
-  ): Promise<AnyValue> {
-
-    const [rows] = await Promise.all([
-      this.execute(parameters.sql),
-    ])
+  protected async getRecords(parameters: AnyValue): Promise<AnyValue> {
+    const [rows] = await Promise.all([this.execute(parameters.sql)])
 
     return {
       rows,
     }
   }
-
 }

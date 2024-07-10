@@ -1,4 +1,3 @@
-
 export * from './response'
 
 export type Entries<T> = {
