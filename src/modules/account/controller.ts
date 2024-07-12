@@ -38,9 +38,10 @@ export class AccountController extends Controller {
       return { message: 'Account ID es nulo' }
     }
     try {
-      return await getDataFromDB(accountId as number)
+      //return await getDataFromDB(accountId as number)
+      return await getDataFromDB(accountId)
     } catch (error) {
-      return { code: 500, message: 'An error occurred' }
+      return { message: 'Error en conexion' }
     }
   }
 }

@@ -11,6 +11,10 @@ import { environment } from './constants'
 
 const app = express()
 
+/* const main = async () => {
+  await clientSQL.connect();
+}
+main() */
 const corsOptions = {
   origin: environment.cors_origins,
   methods: ['POST', 'HEAD', 'OPTIONS'],

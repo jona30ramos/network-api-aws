@@ -21,6 +21,9 @@ export class Environment {
       port: Number(parameters.port ?? 3306),
     }
   }
+  get databaseUrl() {
+    return process.env.DATABASE_URL
+  }
 
   get awsRegion() {
     return process.env.DEFAULT_REGION ?? ''
